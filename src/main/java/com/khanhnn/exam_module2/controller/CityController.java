@@ -9,11 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -41,6 +43,34 @@ public class CityController {
             cities = cityService.findAll(pageable);
         }
         modelAndView.addObject("cities", cities);
+        return modelAndView;
+    }
+
+    @GetMapping("/create-city")
+    public ModelAndView showCreateForm() {
+        ModelAndView modelAndView = new ModelAndView("city/create");
+        modelAndView.addObject("city", new City());
+        return modelAndView;
+    }
+
+    @PostMapping("/create-city")
+    public String saveCustomer(@Validated @ModelAttribute("city") City city
+            , BindingResult bindingResult, Model model) {
+        if (bindingResult.hasFieldErrors()) {
+            model.addAllAttributes(bindingResult.getModel());
+            return "city/create";
+        } else {
+            cityService.save(city);
+            model.addAttribute("city", city);
+            return "redirect:/cities";
+        }
+    }
+
+    @GetMapping("/view-city/{id}")
+    public ModelAndView view(@PathVariable Long id) {
+        City city = cityService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("city/view");
+        modelAndView.addObject("city", city);
         return modelAndView;
     }
 
