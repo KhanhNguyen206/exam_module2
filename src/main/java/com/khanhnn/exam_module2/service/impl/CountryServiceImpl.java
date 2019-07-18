@@ -31,4 +31,9 @@ public class CountryServiceImpl implements CountryService {
     public void remove(Long id) {
         countryRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Country> findAll() {
+        return countryRepository.findAll();
+    }
 }

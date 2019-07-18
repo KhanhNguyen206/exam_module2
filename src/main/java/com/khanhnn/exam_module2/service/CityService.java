@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface CityService {
 
+    Page<City> findAllByNameContaining(String name, Pageable pageable);
+
     Page<City> findAll(Pageable pageable);
 
     City findById(Long id);

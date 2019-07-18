@@ -31,4 +31,9 @@ public class CityServiceImpl implements CityService {
     public void remove(Long id) {
         cityRepository.deleteById(id);
     }
+
+    @Override
+    public Page<City> findAllByNameContaining(String name, Pageable pageable) {
+        return cityRepository.findAllByNameContaining(name,pageable);
+    }
 }

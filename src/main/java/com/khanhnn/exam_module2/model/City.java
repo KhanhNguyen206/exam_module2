@@ -32,6 +32,7 @@ public class City {
     private Long population;
 
     @NotEmpty
+    @Min(0)
     private Long GDP;
 
     @NotEmpty
@@ -44,7 +45,7 @@ public class City {
                 Country country,
                 @NotEmpty @Min(10) @Max(1000000) Long area,
                 @NotEmpty @Min(100) Long population,
-                @NotEmpty Long GDP,
+                @NotEmpty @Min(0) Long GDP,
                 @NotEmpty String description) {
         this.name = name;
         this.country = country;

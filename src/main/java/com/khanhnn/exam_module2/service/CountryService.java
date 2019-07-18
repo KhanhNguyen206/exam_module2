@@ -13,4 +13,6 @@ public interface CountryService {
     void save(Country country);
 
     void remove(Long id);
+
+    Iterable<Country> findAll();
 }
