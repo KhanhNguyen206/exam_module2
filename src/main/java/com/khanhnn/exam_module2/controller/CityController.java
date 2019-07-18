@@ -32,15 +32,15 @@ public class CityController {
 
     @GetMapping("/cities")
     public ModelAndView list(@RequestParam("search") Optional<String> search, @PageableDefault(size = 5) Pageable pageable) {
-//        Page<City> cities;
+        Page<City> cities;
         ModelAndView modelAndView = new ModelAndView("city/list");
-//
-//        if (search.isPresent()) {
-//            cities = cityService.findAllByNameContaining(search.get(), pageable);
-//        } else {
-//            cities = cityService.findAll(pageable);
-//        }
-//        modelAndView.addObject("cities", cities);
+
+        if (search.isPresent()) {
+            cities = cityService.findAllByNameContaining(search.get(), pageable);
+        } else {
+            cities = cityService.findAll(pageable);
+        }
+        modelAndView.addObject("cities", cities);
         return modelAndView;
     }
 

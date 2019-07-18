@@ -35,6 +35,7 @@ public class City {
     @Min(0)
     private Long GDP;
 
+    @Column(columnDefinition = "long")
     @NotEmpty
     private String description;
 
