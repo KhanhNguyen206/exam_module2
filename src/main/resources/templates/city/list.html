@@ -3,30 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>List</title>
+    <link rel="stylesheet"
+          href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+          integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
 </head>
 <body>
-<a th:href="@{/create-city}">Create City</a>
-<br>
-<form>
-    <input type="text" placeholder="Search.." name="search">
-    <input type="submit" value="Search">
-</form>
-<br>
-<table border="1">
-    <tr>
-        <th>#</th>
-        <th>City Name: </th>
-        <th>Country Name: </th>
-        <th>Modify</th>
-    </tr>
-    <tr th:each="city : ${cities}">
-        <td th:text="${city.id}"></td>
-        <td><a th:href="@{/view-city/__${city.id}__}"><p th:text="${city.name}"></p></a></td>
-        <td th:text="${city.getCountry().name}"></td>
-        <td><a th:href="@{/edit-city/__${city.id}__}">Edit</a>|<a
-                th:href="@{/delete-city/__${city.id}__}">Delete</a></td>
-    </tr>
-</table>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/cities}">Brand</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/cities}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/create-city}">Create</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search..." aria-label="Search">
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search"></input>
+        </form>
+    </div>
+</nav>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">City Name</th>
+            <th scope="col">Country Name</th>
+            <th scope="col">Modify</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="city: ${cities}">
+            <th scope="row" th:text="${city.id}"></th>
+            <td><a th:href="@{/view-city/__${city.id}__}"><span th:text="${city.name}"></span></a></td>
+            <td th:text="${city.getCountry().name}"></td>
+            <td><a th:href="@{/edit-city/__${city.id}__}"><i class="far fa-edit"></i></a>|
+                <a th:href="@{/delete-city/__${city.id}__}"><i class="far fa-trash-alt"></i></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <br>
 <span th:if="${cities.hasPrevious()}">
         <a th:href="@{/cities(page=${cities.number - 1})}">Previous</a>
@@ -35,5 +59,9 @@
 <span th:if="${cities.hasNext()}">
         <a th:href="@{/employees(page=${cities.number+1})}">Next</a>
 </span>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
 </body>
 </html>
