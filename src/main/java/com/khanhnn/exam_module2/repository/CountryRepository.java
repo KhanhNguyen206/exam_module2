@@ -1,4 +1,7 @@
 package com.khanhnn.exam_module2.repository;
 
-public interface CountryRepository {
+import com.khanhnn.exam_module2.model.Country;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface CountryRepository extends PagingAndSortingRepository<Country, Long> {
 }
