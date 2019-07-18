@@ -54,9 +54,9 @@ public class CityController {
     }
 
     @PostMapping("/create-city")
-    public String saveCustomer(@Validated @ModelAttribute("city") City city
+    public String saveCustomer(@Valid @ModelAttribute("city") City city
             , BindingResult bindingResult, Model model) {
-        if (bindingResult.hasFieldErrors()) {
+        if (bindingResult.hasErrors()) {
             model.addAllAttributes(bindingResult.getModel());
             return "city/create";
         } else {

@@ -2,10 +2,7 @@ package com.khanhnn.exam_module2.model;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 public class City {
@@ -22,16 +19,16 @@ public class City {
     @JoinColumn(name = "country_Id")
     private Country country;
 
-    @NotEmpty
+    @NotNull
     @Min(10)
     @Max(1000000)
     private Long area;
 
-    @NotEmpty
+    @NotNull
     @Min(100)
     private Long population;
 
-    @NotEmpty
+    @NotNull
     @Min(0)
     private Long GDP;
 
@@ -42,12 +39,7 @@ public class City {
     public City() {
     }
 
-    public City(@NotEmpty @Size(min = 1, max = 30) String name,
-                Country country,
-                @NotEmpty @Min(10) @Max(1000000) Long area,
-                @NotEmpty @Min(100) Long population,
-                @NotEmpty @Min(0) Long GDP,
-                @NotEmpty String description) {
+    public City(@NotEmpty @Size(min = 1, max = 30) String name, Country country, @NotNull @Min(10) @Max(1000000) Long area, @NotNull @Min(100) Long population, @NotNull @Min(0) Long GDP, @NotEmpty String description) {
         this.name = name;
         this.country = country;
         this.area = area;
