@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Test</title>
 </head>
 <body>
-
+<div>
+    <a th:href="@{/cities}">Cities</a>
+</div>
+<form th:action="@{/create-city}" th:object="${city}" method="post">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Country : </td>
+            <td><select th:field="*{country}">
+                <option th:each="country : ${countries}" th:value="${country.id}"
+                        th:text="${country.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Population: </td>
+            <td><input type="text" th:field="*{population}"/></td>
+            <td th:if="${#fields.hasErrors('population')}" th:errors="*{population}"></td>
+        </tr>
+        <tr>
+            <td>GDP: </td>
+            <td><input type="text" th:field="*{GDP}"/></td>
+            <td th:if="${#fields.hasErrors('GDP')}" th:errors="*{GDP}"></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create"></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>
